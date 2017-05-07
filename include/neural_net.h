@@ -40,7 +40,7 @@ void NeuralNet_set_inputs(NeuralNet* self, unsigned char* inputs, unsigned char 
 void NeuralNet_set_hiddens(NeuralNet* self, unsigned char* inputs, unsigned char inputs_length);
 void NeuralNet_set_outputs(NeuralNet* self, unsigned char* inputs, unsigned char inputs_length);
 void NeuralNet_autoset_neurons(NeuralNet* self);
-void NeuralNet_feed_forward(NeuralNet* self, float* inputs);
+float* NeuralNet_feed_forward(NeuralNet* self, float inputs[]);
 void NeuralNet_print_conections(NeuralNet* self);
 void NeuralNet_print_net(NeuralNet* self);
 void NeuralNet_print_output(NeuralNet* self);

@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
 float w[] = {1};//{-0.32};
 float ww[] = {1};
 float www[] = {1};
@@ -53,9 +54,8 @@ int main(int argc, char** argv)
     Neuron_set_weights(net->neurons[8], w_3, 3);
     Neuron_set_weights(net->neurons[9], ww_3, 3);
 
-    //NeuralNet_feed_forward(net, test);
     NeuralNet_print_net(net);
-    //NeuralNet_print_output(net);
+
 
     Neuron* a = Neuron_create();
     Neuron* b = Neuron_create();
@@ -125,5 +125,42 @@ int main(int argc, char** argv)
     Neuron_feed_forward(i, out_layer2);
     Neuron_feed_forward(j, out_layer2);
     printf("La salida de la red neuronal es: %f, %f\n", i->output, j->output);
+
+    /*
+     * Pruebas del feed forward
+     */
+
+    unsigned char uchar_i = 0;
+    float input_layer[net->number_of_inputs]; //(float*)malloc(sizeof(float) * net->number_of_inputs);
+    float hidden_layer[net->number_of_hiddens]; //(float*)malloc(sizeof(float) * net->number_of_hiddens);
+    printf("Capas: %d, %d, %d\n", net->number_of_inputs, net->number_of_hiddens, net->number_of_outputs);
+    printf("Reservados los espacios de memoria en las capas");
+    for(uchar_i = 0; uchar_i < net->number_of_inputs; uchar_i++)
+    {
+        input_layer[uchar_i] = 0;
+        printf("\n\tLlamando al feed forward de la neurona %d", uchar_i);
+        input_layer[uchar_i] = Neuron_feed_forward(net->neurons[net->inputs[uchar_i]], &test[uchar_i]);
+    }
+    printf("\nLlamando feed forwards a mano\n");
+    printf("Number of neurons: %d", net->number_of_neurons);
+    printf("\nhidden 0\n");
+    hidden_layer[0] = Neuron_feed_forward(net->neurons[5], input_layer);
+    printf("\nhidden 1\n");
+    hidden_layer[1] = Neuron_feed_forward(net->neurons[6], input_layer);
+    printf("\nhidden 2\n");
+    hidden_layer[2] = Neuron_feed_forward(net->neurons[7], input_layer);
+    printf("Number_of_outputs: %d", net->number_of_outputs);
+    printf("\noutput 0\n");
+    net->output_values[0] = Neuron_feed_forward(net->neurons[8], hidden_layer);
+    printf("\noutput 1\n");
+    net->output_values[1] = Neuron_feed_forward(net->neurons[9], hidden_layer);
+    printf("\nAcabdo el amano\n");
+    /*
+     * Aqui termina el feed forward
+     */
+
+    //NeuralNet_feed_forward(net, test);
+
+    //NeuralNet_print_output(net);
     return 0;
 }

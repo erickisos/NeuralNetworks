@@ -229,7 +229,7 @@ float* NeuralNet_randomized_weights(unsigned char n)
     return weights;
 }
 
-void NeuralNet_feed_forward(NeuralNet* self, float* inputs)
+float* NeuralNet_feed_forward(NeuralNet* self, float inputs[])
 {
     printf("Ni se si si esta entrando alv");
     unsigned char i = 0;
@@ -256,6 +256,8 @@ void NeuralNet_feed_forward(NeuralNet* self, float* inputs)
         Neuron_feed_forward(self->neurons[self->outputs[i]], hidden_layer);
         self->output_values[i] = self->neurons[self->outputs[i]]->output;
     }
+    float* results = self->output_values;
+    return results;
 }
 
 void NeuralNet_print_conections(NeuralNet* self)
