@@ -128,7 +128,7 @@ int main(int argc, char** argv)
 
     /*
      * Pruebas del feed forward
-     */
+    
 
     unsigned char uchar_i = 0;
     float input_layer[net->number_of_inputs]; //(float*)malloc(sizeof(float) * net->number_of_inputs);
@@ -155,7 +155,7 @@ int main(int argc, char** argv)
     printf("\noutput 1\n");
     net->output_values[1] = Neuron_feed_forward(net->neurons[9], hidden_layer);
     printf("\nAcabdo el amano\n");
-    /*
+    
      * Aqui termina el feed forward
      */
 
